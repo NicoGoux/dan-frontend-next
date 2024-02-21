@@ -3,25 +3,42 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  /* https://www.happyhues.co/palettes/11 */
+  --background: #f9f4ef;
+  --primary-font: #020826;
+  --secondary-font: #716040;
+  --button: #8c7851;
+  --button-text: #fffffe;
+  --border: #020826;
 }
 
 @media (prefers-color-scheme: dark) {
+  /* https://www.happyhues.co/palettes/12 */
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background: #232946;
+    --primary-font: #fffffe;
+    --secondary-font: #b8c1ec;
+    --button: #eebbc3;
+    --button-text: #232946;
+    --border: #121629;
   }
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  height: 100vh;
+  background-color: var(--background);
+  color: var(--primary-font);
+  @apply text-base;
+}
+
+@layer base {
+  .nav-button {
+    @apply w-fit p-2 hover:underline;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
 }

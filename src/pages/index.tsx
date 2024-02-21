@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Link from "app/components/Link";
 import ProTip from "app/components/ProTip";
 import Copyright from "app/components/Copyright";
-import { RootLayout } from "app/components/RootLayout";
+import { RootLayout } from "app/components/Layout/RootLayout";
 
 export default function Home() {
   return (

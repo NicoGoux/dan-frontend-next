@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import ProTip from "app/components/ProTip";
 import Link from "app/components/Link";
 import Copyright from "app/components/Copyright";
-import { RootLayout } from "app/components/RootLayout";
+import { RootLayout } from "app/components/Layout/RootLayout";
 
 export default function About() {
   return (

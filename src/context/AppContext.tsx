@@ -7,12 +7,14 @@ import React, {
   useMemo,
   ReactNode,
 } from "react";
-import { API_URL, CATEGORY_URL } from "../globals";
+import { API_URL, CATEGORY_URL, SUPPLIER_URL } from "../globals";
 
 // Definición de tipos
 interface ContextProps {
   categoryList: Array<Category>;
   setCategoryList: React.Dispatch<React.SetStateAction<Array<Category>>>;
+  supplierList: Array<Supplier>;
+  setSupplierList: React.Dispatch<React.SetStateAction<Array<Supplier>>>;
 }
 
 // Crear contexto
@@ -24,23 +26,12 @@ export const AppContextProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [categoryList, setCategoryList] = useState(Array<Category>);
 
+  const [supplierList, setSupplierList] = useState(Array<Supplier>);
+
   // ComponentDidMount
   useEffect(() => {
-    const getCategories = async () => {
-      try {
-        const response = await axios.get(`${API_URL}${CATEGORY_URL.getAll}`);
-        setCategoryList(
-          response.data.map((category: any) => ({
-            id: parseInt(category.id),
-            name: category.nombre,
-          })),
-        );
-        console.log(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getCategories();
+    getCategories(setCategoryList);
+    getSuppliers(setSupplierList);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -49,8 +40,10 @@ export const AppContextProvider: React.FC<{ children: ReactNode }> = ({
     () => ({
       categoryList,
       setCategoryList,
+      supplierList,
+      setSupplierList,
     }),
-    [categoryList],
+    [categoryList, supplierList],
   );
 
   // Interface que actuará como proveedor y envolverá la aplicación
@@ -67,3 +60,34 @@ export function useAppContext(): ContextProps {
 
   return context;
 }
+
+const getCategories = async (setCategoryList: Function) => {
+  try {
+    const response = await axios.get(`${API_URL}${CATEGORY_URL.getAll}`);
+    setCategoryList(
+      response.data.map((category: any) => ({
+        id: parseInt(category.id),
+        name: category.nombre,
+      })),
+    );
+    console.log(response.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getSuppliers = async (setSupplierList: Function) => {
+  try {
+    const response = await axios.get(`${API_URL}${SUPPLIER_URL.getAll}`);
+    setSupplierList(
+      response.data.map((supplier: any) => ({
+        id: parseInt(supplier.id),
+        name: supplier.nombre,
+        mail: supplier.mail,
+      })),
+    );
+    console.log(response.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
