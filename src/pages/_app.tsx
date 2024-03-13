@@ -2,19 +2,19 @@
 import "app/styles/globals.css";
 import Head from "next/head";
 import { AppProps } from "next/app";
-import { AppCacheProvider } from "@mui/material-nextjs/v14-pagesRouter";
+import { ConfigProvider } from "antd";
 import { AppContextProvider } from "app/context/AppContext";
+import theme from "../theme/themeConfig";
 
-export default function MyApp(props: AppProps) {
-  const { Component, pageProps } = props;
-  return (
-    <AppCacheProvider {...props}>
-      <AppContextProvider>
-        <Head>
-          <meta name="viewport" content="initial-scale=1, width=device-width" />
-        </Head>
-        <Component {...pageProps} />
-      </AppContextProvider>
-    </AppCacheProvider>
-  );
-}
+const App = ({ Component, pageProps }: AppProps) => (
+  <ConfigProvider theme={theme}>
+    <AppContextProvider>
+      <Head>
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
+      </Head>
+      <Component {...pageProps} />
+    </AppContextProvider>
+  </ConfigProvider>
+);
+
+export default App;

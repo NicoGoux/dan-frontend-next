@@ -1,4 +1,4 @@
-import { Menu, MenuItem } from "@mui/material";
+import { Button } from "antd";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -19,10 +19,11 @@ const MenuButton = (props: MenuButtonProps) => {
   };
   return (
     <>
+      <Button className="nav-button">antdbutton</Button>
       <button className="nav-button" onClick={handleClick}>
         {buttonLabel}
       </button>
-      <Menu
+      {/* <Menu
         id="basic-menu"
         anchorEl={anchorEl}
         open={open}
@@ -36,7 +37,7 @@ const MenuButton = (props: MenuButtonProps) => {
             <Link href={`/category/${route.route}`}>{route.label}</Link>
           </MenuItem>
         ))}
-      </Menu>
+      </Menu> */}
     </>
   );
 };
